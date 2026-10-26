@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: sourcefuse_orders
+  datasource:
+    url: jdbc:mysql://localhost:3306/sourcefuse_orders?serverTimezone=UTC&useSSL=false
+    username: root
+    password: Somil@153
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      # Validates the schema against Flyway scripts without modifying the DB structure
+      ddl-auto: validate
+  flyway:
+    enabled: true
