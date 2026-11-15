@@ -10,5 +10,10 @@ spring:
     hibernate:
       # Validates the schema against Flyway scripts without modifying the DB structure
       ddl-auto: validate
+    show-sql: true
   flyway:
     enabled: true
+
+server:
+  servlet:
+    context-path: /api/v1
