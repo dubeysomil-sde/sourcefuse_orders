@@ -7,4 +7,12 @@ import java.util.List;
 public interface UserService {
 
     List<UserResponse> getAllUsers();
+
+    UserResponse getUserById(int userId);
+
+    UserResponse deleteUserById(int userId);
+
+    UserResponse createUser(UserResponse userResponse);
+
+    UserResponse updateUser(int userId , UserResponse userResponse);
 }

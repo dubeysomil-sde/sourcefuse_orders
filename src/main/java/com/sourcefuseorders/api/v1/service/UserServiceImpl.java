@@ -34,4 +34,56 @@ public class UserServiceImpl implements UserService{
 
         return userList;
     }
+
+    @Override
+    public UserResponse getUserById(int userId) {
+        User user = usersRespository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        }else{
+            UserResponse userResponse = new UserResponse();
+            userResponse.setEmail(user.getEmail().toLowerCase());
+            userResponse.setName(user.getName());
+            userResponse.setCreatedAt(user.getCreatedAt());
+            userResponse.setOrders(user.getOrders());
+            return userResponse;
+        }
+    }
+
+    @Override
+    public UserResponse deleteUserById(int userId) {
+        UserResponse userResponse = getUserById(userId);
+        if (userResponse == null) {
+            return null;
+        } else {
+            usersRespository.deleteById(userId);
+            return userResponse;
+        }
+    }
+
+    @Override
+    public UserResponse createUser(UserResponse userResponse) {
+        User user = new User();
+        user.setName(userResponse.getName());
+        user.setEmail(userResponse.getEmail().toLowerCase());
+        user.setCreatedAt(userResponse.getCreatedAt());
+        user.setOrders(userResponse.getOrders());
+        usersRespository.save(user);
+        return userResponse;
+    }
+
+    @Override
+    public UserResponse updateUser(int userId, UserResponse userResponse) {
+        User user = usersRespository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        } else {
+            user.setName(userResponse.getName());
+            user.setEmail(userResponse.getEmail().toLowerCase());
+            user.setCreatedAt(userResponse.getCreatedAt());
+            user.setOrders(userResponse.getOrders());
+            usersRespository.save(user);
+            return userResponse;
+        }
+    }
 }
